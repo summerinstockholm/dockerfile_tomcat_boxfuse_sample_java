@@ -7,4 +7,4 @@ RUN cd /tmp && tar xvfz tomcat.tar.gz
 RUN cp -Rv /tmp/apache-tomcat-9.0.69/* /usr/local/tomcat/
 EXPOSE 8080
 CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
-ADD /home/catware/boxfuse-sample-java-war-hello /boxfuse-sample-java-war-hello
+ADD /home/catware/boxfuse-sample-java-war-hello/ /boxfuse-sample-java-war-hello
