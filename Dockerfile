@@ -9,7 +9,8 @@ RUN cp -Rv /tmp/apache-tomcat-9.0.69/* /usr/local/tomcat/
 WORKDIR /boxfuse-sample-java-war-hello
 COPY . .
 RUN mvn package
-COPY --from=build /boxfuse-sample-java-war-hello/target/simple-servlet-0.1.war /usr/local/tomcat/webapps 
+RUN cp /boxfuse-sample-java-war-hello/target/simple-servlet-*.*.war /usr/local/tomcat/webapps
+RUN rm  /boxfuse-sample-java-war-hello/target/simple-servlet-*.*.war
 #RUN mkdir boxfuse-sample-java-war-hello
 
 #COPY . /boxfuse-sample-java-war-hello
