@@ -6,20 +6,23 @@ RUN mkdir /usr/local/tomcat
 RUN wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.69/bin/apache-tomcat-9.0.69.tar.gz -O /tmp/tomcat.tar.gz
 RUN cd /tmp && tar xvfz tomcat.tar.gz
 RUN cp -Rv /tmp/apache-tomcat-9.0.69/* /usr/local/tomcat/
-RUN echo $PWD
-RUN mkdir boxfuse-sample-java-war-hello
-RUN echo $PWD
-COPY . /boxfuse-sample-java-war-hello
-RUN echo $PWD
-RUN cd /boxfuse-sample-java-war-hello
-RUN echo $PWD
+WORKDIR /boxfuse-sample-java-war-hello
+COPY . .
 RUN mvn package
-RUN echo $PWD
-RUN cd target
-RUN echo $PWD
-RUN cp simple-servlet-0.1.war /var/lib/tomcat9/webapps/
-RUN echo $PWD
-RUN rm -rf /target/*
-RUN echo $PWD
+COPY --from=build /boxfuse-sample-java-war-hello/target/simple-servlet-0.1.war /usr/local/tomcat/webapps 
+#RUN mkdir boxfuse-sample-java-war-hello
+
+#COPY . /boxfuse-sample-java-war-hello
+
+#RUN cd /boxfuse-sample-java-war-hello
+
+#RUN mvn package
+
+#RUN cd target
+
+#RUN cp simple-servlet-0.1.war /var/lib/tomcat9/webapps/
+
+#RUN rm -rf /target/*
+
 EXPOSE 8080
 CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
