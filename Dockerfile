@@ -9,8 +9,9 @@ RUN cp -Rv /tmp/apache-tomcat-9.0.69/* /usr/local/tomcat/
 RUN cd /
 RUN mkdir boxfuse-sample-java-war-hello
 COPY . /boxfuse-sample-java-war-hello
-WORKDIR /boxfuse-sample-java-war-hello
-RUN mvn -f /boxfuse-sample-java-war-hello/pom.xml package
+RUN cd /boxfuse-sample-java-war-hello
+# -f /boxfuse-sample-java-war-hello/pom.xml 
+RUN mvn package
 RUN cd target
 RUN cp simple-servlet-0.1.war /var/lib/tomcat9/webapps/
 RUN rm -rf /target/*
